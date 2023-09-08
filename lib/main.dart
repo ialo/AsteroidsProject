@@ -1,7 +1,8 @@
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
-import 'package:flame/input.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'command.dart';
@@ -33,7 +34,7 @@ Future<void> main() async {
 ///     - iteration of code we will add the next-level logic
 ///
 class CaseStudy008DesignPatterns004 extends FlameGame
-    with HasDraggables, HasTappables, HasCollisionDetection {
+    with CollisionCallbacks, TapCallbacks, HasCollisionDetection {
   static const String description = '''
     In this example we showcase how to use the joystick by creating simple
     `CircleComponent`s that serve as the joystick's knob and background.
@@ -48,7 +49,7 @@ class CaseStudy008DesignPatterns004 extends FlameGame
   @override
 
   /// use this flag to put the project into debug mode which will show hitboxes
-  bool debugMode = false;
+  bool debugMode = true;
 
   /// controller used to coordinate all game actions
   late final Controller controller;
@@ -109,9 +110,9 @@ class CaseStudy008DesignPatterns004 extends FlameGame
   //
   // We will handle the tap action by the user to shoot a bullet
   // each time the user taps and lifts their finger
-  void onTapUp(int pointerId, TapUpInfo info) {
+  void onTapUp(TapUpEvent event) {
     UserTapUpCommand(controller.getSpaceship()).addToController(controller);
-    super.onTapUp(pointerId, info);
+    super.onTapUp(event);
   }
 
   ///

@@ -2,7 +2,6 @@ import 'package:component_001/spaceship.dart';
 import 'package:component_001/utils.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/geometry.dart';
 import 'package:flutter/material.dart';
 
 import 'bullet.dart';
@@ -89,10 +88,13 @@ abstract class Asteroid extends PositionComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
+
     /// <todo> collision detection
     debugPrint("<Asteroid> <onCollision> detected... $other");
 
     if (other is Bullet) {
+      debugPrint("<Asteroid - Bullet> <onCollision> detected... $other");
       BulletCollisionCommand(other, this).addToController(gameRef.controller);
       AsteroidCollisionCommand(this, other).addToController(gameRef.controller);
       UpdateScoreboardScoreCommand(gameRef.controller.getScoreBoard)

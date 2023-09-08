@@ -121,7 +121,9 @@ abstract class SpaceShip extends SpriteComponent
 
   //
   // Called when the Bullet has been hit. The ‘other’ is what the bullet hit, or was hit by.
-  void onHit(PositionComponent other);
+  // void onHit(PositionComponent other);
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other);
 
   /// Wrap the posittion getter so that any position that is out side of the
   /// screen gets wrapped around
@@ -204,7 +206,9 @@ class SimpleSpaceShip extends SpaceShip {
   }
 
   @override
-  void onHit(PositionComponent other) {
+  // void onHit(PositionComponent other) {
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
     print("SimpleSpaceShip onHit called");
   }
 }

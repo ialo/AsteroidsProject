@@ -118,7 +118,10 @@ abstract class Bullet extends PositionComponent
 
   //
   // Called when the Bullet has been hit. The ‘other’ is what the bullet hit, or was hit by.
-  void onHit(PositionComponent other);
+  // void onHit(PositionComponent other);
+  // @override
+  // void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+  // super.onCollision(intersectionPoints, other);
 
   ////////////////////////////////////////////////////////////
   // Helper methods
@@ -129,6 +132,13 @@ abstract class Bullet extends PositionComponent
       BulletDestroyCommand(this).addToController(gameRef.controller);
       //FlameAudio.audioCache.play('missile_hit.wav');
     }
+  }
+
+  @override
+  // void onHit(PositionComponent other) {
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
+    print("#Bullet onHit called");
   }
 }
 
@@ -193,7 +203,9 @@ class FastBullet extends Bullet {
   }
 
   @override
-  void onHit(PositionComponent other) {
+  // void onHit(PositionComponent other) {
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
     print("FastBullet onHit called");
   }
 }
@@ -259,7 +271,9 @@ class SlowBullet extends Bullet {
   }
 
   @override
-  void onHit(PositionComponent other) {
+  // void onHit(PositionComponent other) {
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
     print("SlowBullet onHit called");
   }
 }

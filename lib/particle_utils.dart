@@ -75,7 +75,8 @@ abstract class Explosion {
 
   //
   // Called when the explosion has been hit. The ‘other’ is what the explosion hit, or was hit by.
-  void onHit(PositionComponent other);
+  // void onHit(PositionComponent other);
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other);
 
   //
   // Main generator method. This will create the actual particle simulation to the caller
@@ -122,7 +123,8 @@ class ParticleExplosion360 extends Explosion {
             size: size, lifespan: lifespan, particleCount: particleCount);
 
   @override
-  void onHit(PositionComponent other) {
+  // void onHit(PositionComponent other) {
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     debugPrint("ParticleExplosion360 onHit called");
   }
 
@@ -185,7 +187,8 @@ class ParticleBonusExplosion extends Explosion {
             size: size, lifespan: lifespan, particleCount: particleCount);
 
   @override
-  void onHit(PositionComponent other) {
+  // void onHit(PositionComponent other) {
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     debugPrint("ParticleBonusExplosion onHit called");
   }
 
@@ -250,7 +253,8 @@ class FieryExplosion extends Explosion {
             images: images);
 
   @override
-  void onHit(PositionComponent other) {
+  // void onHit(PositionComponent other) {
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     debugPrint("FieryExplosion onHit called");
   }
 
