@@ -34,7 +34,7 @@ abstract class Bullet extends PositionComponent
   static const double defaultSpeed = 100.00;
   static const int defaultDamage = 1;
   static const int defaultHealth = 1;
-  static final Vector2 defaulSize = Vector2.all(1.0);
+  static final defaulSize = Vector2.all(2.0);
 
   // velocity vector for the bullet.
   late Vector2 _velocity;
@@ -105,11 +105,7 @@ abstract class Bullet extends PositionComponent
   //
   // Called when the Bullet has been created.
   void onCreate() {
-    // to improve accurace of collision detection we make the hitbox
-    // about 4 times larger for the bullets.
-    // addHitbox(HitboxRectangle(relation: Vector2(2.0, 2.0)));
-    add(RectangleHitbox(position: Vector2(2.0, 2.0)));
-    //addHitbox(HitboxRectangle());
+    add(RectangleHitbox());
   }
 
   //
@@ -119,9 +115,11 @@ abstract class Bullet extends PositionComponent
   //
   // Called when the Bullet has been hit. The ‘other’ is what the bullet hit, or was hit by.
   // void onHit(PositionComponent other);
-  // @override
-  // void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-  // super.onCollision(intersectionPoints, other);
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
+    print("#Bullet onHit called");
+  }
 
   ////////////////////////////////////////////////////////////
   // Helper methods
@@ -132,13 +130,6 @@ abstract class Bullet extends PositionComponent
       BulletDestroyCommand(this).addToController(gameRef.controller);
       //FlameAudio.audioCache.play('missile_hit.wav');
     }
-  }
-
-  @override
-  // void onHit(PositionComponent other) {
-  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    super.onCollision(intersectionPoints, other);
-    print("#Bullet onHit called");
   }
 }
 

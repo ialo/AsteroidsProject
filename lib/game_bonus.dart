@@ -119,7 +119,7 @@ abstract class GameBonus extends PositionComponent
   //
   // Called when the asteroid has been hit. The ‘other’ is what the asteroid
   // hit, or was hit by.
-  void onHit(PositionComponent other);
+  // void onHit(PositionComponent other);
 
   ////////////////////////////////////////////////////////
   // Overrides
@@ -131,6 +131,8 @@ abstract class GameBonus extends PositionComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
+
     /// <todo> collision detection
     debugPrint("<Game Bonus> <onCollision> detected... $other");
 

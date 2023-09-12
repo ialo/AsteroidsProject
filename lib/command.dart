@@ -8,7 +8,6 @@ import 'package:component_001/particle_utils.dart';
 import 'package:component_001/scoreboard.dart';
 import 'package:component_001/spaceship.dart';
 import 'package:flame/components.dart';
-import 'package:flame/particles.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -244,11 +243,11 @@ class BulletFiredSoundCommand extends Command {
 ///
 class BulletCollisionCommand extends Command {
   /// the bullet being operated on
-  late Bullet targetBullet;
+  late PositionComponent targetBullet;
   late PositionComponent collisionObject;
 
   /// deault constructor
-  BulletCollisionCommand(Bullet bullet, PositionComponent other) {
+  BulletCollisionCommand(PositionComponent bullet, PositionComponent other) {
     targetBullet = bullet;
     collisionObject = other;
   }
@@ -259,7 +258,7 @@ class BulletCollisionCommand extends Command {
   @override
   void execute() {
     // let the bullet know its being destroyed.
-    targetBullet.onDestroy();
+    // targetBullet.onDestroy();//TODO
     // remove the bullet from the game
     _getController().remove(targetBullet);
   }
@@ -285,13 +284,13 @@ class BulletCollisionCommand extends Command {
 class AsteroidCollisionCommand extends Command {
   /// the bullet being operated on
   late Asteroid _targetAsteroid;
-  late PositionComponent _collisionObject;
+  late PositionComponent collisionObject;
   Vector2? _collisionPosition;
 
   /// deault constructor
   AsteroidCollisionCommand(Asteroid asteroid, PositionComponent other) {
     _targetAsteroid = asteroid;
-    _collisionObject = other;
+    collisionObject = other;
     _collisionPosition = _targetAsteroid.position.clone();
   }
 

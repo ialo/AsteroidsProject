@@ -93,7 +93,7 @@ abstract class Asteroid extends PositionComponent
     /// <todo> collision detection
     debugPrint("<Asteroid> <onCollision> detected... $other");
 
-    if (other is Bullet) {
+    if (other is FastBullet || other is SlowBullet) {
       debugPrint("<Asteroid - Bullet> <onCollision> detected... $other");
       BulletCollisionCommand(other, this).addToController(gameRef.controller);
       AsteroidCollisionCommand(this, other).addToController(gameRef.controller);
@@ -141,8 +141,7 @@ abstract class Asteroid extends PositionComponent
     size.y = size.x;
     position = Utils.vector2Multiply(position, _resolutionMultiplier);
     debugPrint("<Asteroid> <onCreate> size: ${size.x}, ${size.y}");
-    // addHitbox(HitboxCircle(normalizedRadius: 2.0));
-    add(CircleHitbox(radius: 2.0));
+    add(CircleHitbox());
   }
 
   //

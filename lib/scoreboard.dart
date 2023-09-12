@@ -14,6 +14,7 @@ class ScoreBoard extends PositionComponent
   int _score = 0;
   int _livesLeft = 0;
   int _currentLevel = 0;
+  // ignore: prefer_final_fields
   int _maxLevels = 0;
   int _timeSinceStartInSeconds = 0;
   int _timeSinceStartofLevelInSeconds = 0;
@@ -220,7 +221,7 @@ class ScoreBoard extends PositionComponent
     // render the angle in radians for reference
     _levelInfoPaint.render(
       canvas,
-      '${formatLevelData()}',
+      formatLevelData(),
       Vector2(gameRef.size.x - 100, 48),
     );
 
@@ -264,6 +265,5 @@ class ScoreBoard extends PositionComponent
     }
 
     return result + ' of ' + _maxLevels.toString();
-    ;
   }
 }
